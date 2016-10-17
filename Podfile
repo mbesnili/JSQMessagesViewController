@@ -13,6 +13,3 @@ target 'JSQMessages' do
     
 end
 
-target 'JSQMessagesTests' do
-    
-end
