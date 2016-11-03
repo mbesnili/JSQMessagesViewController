@@ -43,6 +43,14 @@
     [self jsq_configureLabel];
 }
 
+-(CGSize)intrinsicContentSize
+{
+    CGSize intrinsicSuperViewContentSize = [super intrinsicContentSize] ;
+    intrinsicSuperViewContentSize.height += self.textInsets.top + self.textInsets.bottom ;
+    intrinsicSuperViewContentSize.width += self.textInsets.left + self.textInsets.right ;
+    return intrinsicSuperViewContentSize ;
+}
+
 #pragma mark - Setters
 
 - (void)setTextInsets:(UIEdgeInsets)textInsets
@@ -53,16 +61,14 @@
     
     _textInsets = textInsets;
     [self setNeedsDisplay];
+    [self invalidateIntrinsicContentSize];
 }
 
 #pragma mark - Drawing
 
 - (void)drawTextInRect:(CGRect)rect
-{
-    [super drawTextInRect:CGRectMake(CGRectGetMinX(rect) + self.textInsets.left,
-                                     CGRectGetMinY(rect) + self.textInsets.top,
-                                     CGRectGetWidth(rect) - self.textInsets.right,
-                                     CGRectGetHeight(rect) - self.textInsets.bottom)];
+{    
+    [super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.textInsets)];
 }
 
 @end
