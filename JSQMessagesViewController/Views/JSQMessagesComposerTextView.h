@@ -20,8 +20,6 @@
 
 @class JSQMessagesComposerTextView;
 
-NS_ASSUME_NONNULL_BEGIN
-
 /**
  *  A delegate object used to notify the receiver of paste events from a `JSQMessagesComposerTextView`.
  */
@@ -47,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The text to be displayed when the text view is empty. The default value is `nil`.
  */
-@property (copy, nonatomic, nullable) NSString *placeHolder;
+@property (copy, nonatomic) NSString *placeHolder;
 
 /**
  *  The color of the place holder text. The default value is `[UIColor lightGrayColor]`.
@@ -68,5 +66,3 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)hasText;
 
 @end
-
-NS_ASSUME_NONNULL_END
