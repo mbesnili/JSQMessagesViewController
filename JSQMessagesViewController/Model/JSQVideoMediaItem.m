@@ -28,6 +28,7 @@
 @interface JSQVideoMediaItem ()
 
 @property (strong, nonatomic) UIImageView *cachedVideoImageView;
+@property (strong, nonatomic) UIImage *playButtonImage;
 
 @end
 
@@ -38,17 +39,21 @@
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay
 {
-    return [self initWithFileURL:fileURL isReadyToPlay:isReadyToPlay thumbnailImage:nil];
+    return [self initWithFileURL:fileURL isReadyToPlay:isReadyToPlay thumbnailImage:nil playButtonImage:nil];
 }
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(UIImage *)thumbnailImage
 {
-    self = [super init];
-    if (self) {
+    return [self initWithFileURL:fileURL isReadyToPlay:isReadyToPlay thumbnailImage:thumbnailImage playButtonImage:nil];
+}
+
+-(instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(UIImage *)thumbnailImage playButtonImage:(UIImage *)playButtonImage {
+    if(self = [super init]) {
         _fileURL = [fileURL copy];
         _isReadyToPlay = isReadyToPlay;
         _cachedVideoImageView = nil;
         _thumbnailImage = thumbnailImage;
+        _playButtonImage = playButtonImage;
     }
     return self;
 }
@@ -89,7 +94,7 @@
     
     if (self.cachedVideoImageView == nil) {
         CGSize size = [self mediaViewDisplaySize];
-        UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
+        UIImage *playIcon = self.playButtonImage ? self.playButtonImage : [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);

@@ -75,4 +75,6 @@
  */
 - (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage;
 
+- (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(UIImage *)thumbnailImage playButtonImage:(UIImage *)playButtonImage;
+
 @end
