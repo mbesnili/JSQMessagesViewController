@@ -109,6 +109,7 @@
             thumbnailImageView.clipsToBounds = YES;
             [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:thumbnailImageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
             imageView.backgroundColor = [UIColor clearColor];
+            thumbnailImageView.backgroundColor = [UIColor blackColor];
             [thumbnailImageView addSubview:imageView];
             self.cachedVideoImageView = thumbnailImageView;
         }
