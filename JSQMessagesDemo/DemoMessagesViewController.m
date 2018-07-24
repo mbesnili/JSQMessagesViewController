@@ -17,9 +17,8 @@
 //
 
 #import "DemoMessagesViewController.h"
-#import "JSQMessagesViewAccessoryButtonDelegate.h"
 
-@interface DemoMessagesViewController () <JSQMessagesViewAccessoryButtonDelegate>
+@interface DemoMessagesViewController ()
 @end
 
 @implementation DemoMessagesViewController
@@ -41,19 +40,13 @@
     
     self.title = @"JSQMessages";
 
-    self.inputToolbar.contentView.textView.pasteDelegate = self;
+    self.inputToolbar.contentView.textView.jsqPasteDelegate = self;
     
     /**
      *  Load up our fake data for the demo
      */
     self.demoData = [[DemoModelData alloc] init];
     
-
-    /**
-     *  Set up message accessory button delegate and configuration
-     */
-    self.collectionView.accessoryDelegate = self;
-
     /**
      *  You can set custom avatar sizes
      */
@@ -361,56 +354,45 @@
 {
     [self.inputToolbar.contentView.textView resignFirstResponder];
 
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Media messages", nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:NSLocalizedString(@"Send photo", nil), NSLocalizedString(@"Send location", nil), NSLocalizedString(@"Send video", nil), NSLocalizedString(@"Send video thumbnail", nil), NSLocalizedString(@"Send audio", nil), nil];
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Media messages", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [sheet showFromToolbar:self.inputToolbar];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
+    [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.demoData addPhotoMediaMessage];
+        [self finishSendingMessageAnimated:YES];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send location", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        __weak UICollectionView *weakView = self.collectionView;
+        [self.demoData addLocationMediaMessageCompletion:^{
+            [weakView reloadData];
+        }];
+        [self finishSendingMessageAnimated:YES];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send video", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.demoData addVideoMediaMessage];
+        [self finishSendingMessageAnimated:YES];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send video thumbnail", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.demoData addVideoMediaMessageWithThumbnail];
+        [self finishSendingMessageAnimated:YES];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send audio", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.demoData addAudioMediaMessage];
+        [self finishSendingMessageAnimated:YES];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [self.inputToolbar.contentView.textView becomeFirstResponder];
-        return;
-    }
-    
-    switch (buttonIndex) {
-        case 0:
-            [self.demoData addPhotoMediaMessage];
-            break;
-            
-        case 1:
-        {
-            __weak UICollectionView *weakView = self.collectionView;
-            
-            [self.demoData addLocationMediaMessageCompletion:^{
-                [weakView reloadData];
-            }];
-        }
-            break;
-            
-        case 2:
-            [self.demoData addVideoMediaMessage];
-            break;
-            
-        case 3:
-            [self.demoData addVideoMediaMessageWithThumbnail];
-            break;
-            
-        case 4:
-            [self.demoData addAudioMediaMessage];
-            break;
-    }
+        
+    }]];
     
     // [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    [self finishSendingMessageAnimated:YES];
+    [self presentViewController:sheet animated:YES completion:nil];
 }
-
-
 
 #pragma mark - JSQMessages CollectionView DataSource
 
@@ -576,17 +558,8 @@
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
-
-    cell.accessoryButton.hidden = ![self shouldShowAccessoryButtonForMessage:msg];
-    
     return cell;
 }
-
-- (BOOL)shouldShowAccessoryButtonForMessage:(id<JSQMessageData>)message
-{
-    return ([message isMediaMessage] && [NSUserDefaults accessoryButtonForMediaMessages]);
-}
-
 
 #pragma mark - UICollectionView Delegate
 
@@ -614,13 +587,10 @@
 - (void)customAction:(id)sender
 {
     NSLog(@"Custom action received! Sender: %@", sender);
-
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Custom Action", nil)
-                                message:nil
-                               delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                      otherButtonTitles:nil]
-     show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Custom Action", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

@@ -40,11 +40,11 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSDictionary *dateAttrs = @{ NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
+    NSDictionary *dateAttrs = @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:12.0f],
                                  NSForegroundColorAttributeName : color,
                                  NSParagraphStyleAttributeName : paragraphStyle };
     
-    NSDictionary *timeAttrs = @{ NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
+    NSDictionary *timeAttrs = @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
                                  NSForegroundColorAttributeName : color,
                                  NSParagraphStyleAttributeName : paragraphStyle };
     
@@ -70,7 +70,7 @@
     
     NSString *timestampString = [[JSQMessagesTimestampFormatter sharedFormatter] timestampForDate:date];
     
-    XCTAssertEqualObjects(timestampString, @"Jun 6, 2013, 7:06 PM", @"Timestamp string should return expected value");
+    XCTAssertEqualObjects(timestampString, @"Jun 6, 2013 at 7:06 PM", @"Timestamp string should return expected value");
     
     NSAttributedString *timestampAttributedString = [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:date];
     
@@ -86,7 +86,6 @@
     [components setSecond:0];
     
     NSDate *date = [components date];
-    
     NSString *timeForDateString = [[JSQMessagesTimestampFormatter sharedFormatter] timeForDate:date];
     
     XCTAssertEqualObjects(timeForDateString, @"7:06 AM", @"Time string should return expected value");
@@ -95,7 +94,6 @@
 - (void)testRelativeDataForDate
 {
     NSDate *date = [NSDate date];
-    
     NSString *relativeDateString = [[JSQMessagesTimestampFormatter sharedFormatter] relativeDateForDate:date];
     
     XCTAssertEqualObjects(relativeDateString, @"Today", @"Relative date string should return expected value");

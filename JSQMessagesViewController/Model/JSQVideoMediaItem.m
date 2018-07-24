@@ -28,6 +28,7 @@
 @interface JSQVideoMediaItem ()
 
 @property (strong, nonatomic) UIImageView *cachedVideoImageView;
+@property (strong, nonatomic) UIImage *playButtonImage;
 
 @end
 
@@ -38,17 +39,21 @@
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay
 {
-    return [self initWithFileURL:fileURL isReadyToPlay:isReadyToPlay thumbnailImage:nil];
+    return [self initWithFileURL:fileURL isReadyToPlay:isReadyToPlay thumbnailImage:nil playButtonImage:nil];
 }
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(UIImage *)thumbnailImage
 {
-    self = [super init];
-    if (self) {
+    return [self initWithFileURL:fileURL isReadyToPlay:isReadyToPlay thumbnailImage:thumbnailImage playButtonImage:nil];
+}
+
+-(instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(UIImage *)thumbnailImage playButtonImage:(UIImage *)playButtonImage {
+    if(self = [super init]) {
         _fileURL = [fileURL copy];
         _isReadyToPlay = isReadyToPlay;
         _cachedVideoImageView = nil;
         _thumbnailImage = thumbnailImage;
+        _playButtonImage = playButtonImage;
     }
     return self;
 }
@@ -86,24 +91,25 @@
     if (self.fileURL == nil || !self.isReadyToPlay) {
         return nil;
     }
-
+    
     if (self.cachedVideoImageView == nil) {
         CGSize size = [self mediaViewDisplaySize];
-        UIImage *playIcon = [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
-
+        UIImage *playIcon = self.playButtonImage ? self.playButtonImage : [[UIImage jsq_defaultPlayImage] jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
+        
         UIImageView *imageView = [[UIImageView alloc] initWithImage:playIcon];
         imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         imageView.contentMode = UIViewContentModeCenter;
         imageView.clipsToBounds = YES;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-
-        if (self.thumbnailImage) {
-            UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:self.thumbnailImage];
+        
+        if (_thumbnailImage) {
+            UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:_thumbnailImage];
             thumbnailImageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
             thumbnailImageView.contentMode = UIViewContentModeCenter;
             thumbnailImageView.clipsToBounds = YES;
             [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:thumbnailImageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
             imageView.backgroundColor = [UIColor clearColor];
+            thumbnailImageView.backgroundColor = [UIColor blackColor];
             [thumbnailImageView addSubview:imageView];
             self.cachedVideoImageView = thumbnailImageView;
         }
@@ -112,7 +118,7 @@
             self.cachedVideoImageView = imageView;
         }
     }
-
+    
     return self.cachedVideoImageView;
 }
 
@@ -128,11 +134,11 @@
     if (![super isEqual:object]) {
         return NO;
     }
-
+    
     JSQVideoMediaItem *videoItem = (JSQVideoMediaItem *)object;
-
+    
     return [self.fileURL isEqual:videoItem.fileURL]
-    && self.isReadyToPlay == videoItem.isReadyToPlay;
+            && self.isReadyToPlay == videoItem.isReadyToPlay;
 }
 
 - (NSUInteger)hash

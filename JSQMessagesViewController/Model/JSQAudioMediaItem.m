@@ -24,6 +24,8 @@
 #import "UIImage+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 
+#import "JSQWeakTimerTarget.h"
+
 
 @interface JSQAudioMediaItem ()
 
@@ -116,11 +118,20 @@
 
 - (void)startProgressTimer
 {
-    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                          target:self
-                                                        selector:@selector(updateProgressTimer:)
-                                                        userInfo:nil
-                                                         repeats:YES];
+    if([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
+        __weak typeof(self) weakSelf = self;
+        self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:true block:^(NSTimer * _Nonnull timer) {
+            __strong typeof(self) strongSelf = weakSelf;
+            [strongSelf updateProgressTimer:strongSelf.progressTimer];
+        }];
+    }
+    else {
+        JSQWeakTimerTarget *target = [[JSQWeakTimerTarget alloc] initWithTarget:self
+                                                                       selector:@selector(updateProgressTimer:)];
+        self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:target
+                                                            selector:NSSelectorFromString(@"timerDidFire:")
+                                                            userInfo:nil repeats:YES];
+    }
 }
 
 - (void)stopProgressTimer
