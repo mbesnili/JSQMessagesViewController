@@ -21,6 +21,8 @@
 
 #import "JSQMessageBubbleImageDataSource.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A `JSQMessagesBubbleImage` model object represents a message bubble image, and is immutable. 
  *  This is a concrete class that implements the `JSQMessageBubbleImageDataSource` protocol.
@@ -58,3 +60,5 @@
 - (id)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

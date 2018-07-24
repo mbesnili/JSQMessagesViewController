@@ -20,6 +20,8 @@
 
 @class JSQMessagesLoadEarlierHeaderView;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A constant defining the default height of a `JSQMessagesLoadEarlierHeaderView`.
  */
@@ -79,3 +81,5 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesLoadEarlierHeaderViewHeight;
 + (NSString *)headerReuseIdentifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

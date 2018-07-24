@@ -26,6 +26,8 @@
 
 @class JSQMessagesKeyboardController;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  Posted when the system keyboard frame changes.
  *  The object of the notification is the `JSQMessagesKeyboardController` object. 
@@ -141,3 +143,5 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 - (void)endListeningForKeyboard;
 
 @end
+
+NS_ASSUME_NONNULL_END

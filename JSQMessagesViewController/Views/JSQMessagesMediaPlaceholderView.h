@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A `JSQMessagesMediaPlaceholderView` object represents a loading or placeholder
  *  view for media message objects whose media attachments are not yet available. 
@@ -90,3 +92,5 @@
                     imageView:(UIImageView *)imageView;
 
 @end
+
+NS_ASSUME_NONNULL_END

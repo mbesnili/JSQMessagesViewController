@@ -23,6 +23,8 @@
 #import "JSQMessagesInputToolbar.h"
 #import "JSQMessagesKeyboardController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
@@ -325,3 +327,5 @@
 - (void)didReceiveMenuWillHideNotification:(NSNotification *)notification;
 
 @end
+
+NS_ASSUME_NONNULL_END

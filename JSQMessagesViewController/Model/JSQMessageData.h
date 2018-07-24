@@ -20,6 +20,8 @@
 
 #import "JSQMessageMediaData.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessageData` protocol defines the common interface through which 
  *  a `JSQMessagesViewController` and `JSQMessagesCollectionView` interact with message model objects.
@@ -95,6 +97,8 @@
  *  
  *  @warning You must not return `nil` from this method.
  */
-- (id<JSQMessageMediaData>)media;
+- (nullable id<JSQMessageMediaData>)media;
 
 @end
+
+NS_ASSUME_NONNULL_END

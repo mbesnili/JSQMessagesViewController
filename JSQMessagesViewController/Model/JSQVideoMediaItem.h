@@ -18,6 +18,8 @@
 
 #import "JSQMediaItem.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQVideoMediaItem` class is a concrete `JSQMediaItem` subclass that implements the `JSQMessageMediaData` protocol
  *  and represents a video media message. An initialized `JSQVideoMediaItem` object can be passed
@@ -56,7 +58,7 @@
  *  isReadyToPlay. Once the video has been saved to disk, or is ready to stream, you can
  *  set the fileURL property or isReadyToPlay property, respectively.
  */
-- (nonnull instancetype)initWithFileURL:(NSURL * _Nullable)fileURL isReadyToPlay:(BOOL)isReadyToPlay;
+- (instancetype)initWithFileURL:(NSURL * _Nullable)fileURL isReadyToPlay:(BOOL)isReadyToPlay;
 
 /**
  *  Initializes and returns a video media item having the given fileURL.
@@ -73,7 +75,7 @@
  *  set the fileURL property or isReadyToPlay property, respectively. The background thumbnail
  *  is optional.
  */
-- (nonnull instancetype)initWithFileURL:(nullable NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage;
+- (instancetype)initWithFileURL:(nullable NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage;
 
 /**
  *  Initializes and returns a video media item having the given fileURL.
@@ -91,6 +93,8 @@
  *  set the fileURL property or isReadyToPlay property, respectively. The background thumbnail
  *  is optional. The play button image is optional.
  */
-- (nonnull instancetype)initWithFileURL:(nullable NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage playButtonImage:(nullable UIImage * )playButtonImage;
+- (instancetype)initWithFileURL:(nullable NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage playButtonImage:(nullable UIImage * )playButtonImage;
 
 @end
+
+NS_ASSUME_NONNULL_END

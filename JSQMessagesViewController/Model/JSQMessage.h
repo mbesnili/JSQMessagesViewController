@@ -20,6 +20,8 @@
 
 #import "JSQMessageData.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessage` class is a concrete class for message model objects that represents a single user message.
  *  The message can be a text message or media message, depending on how it is initialized.
@@ -61,7 +63,7 @@
  *  Returns the media item attachment of the message, or `nil` if the message is not a media message.
  *  That is, if `isMediaMessage` is equal to `NO` then this value will be `nil`.
  */
-@property (copy, nonatomic, readonly) id<JSQMessageMediaData> media;
+@property (copy, nonatomic, readonly, nullable) id<JSQMessageMediaData> media;
 
 
 #pragma mark - Initialization
@@ -137,3 +139,5 @@
 - (id)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

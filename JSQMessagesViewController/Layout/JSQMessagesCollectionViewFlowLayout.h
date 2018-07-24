@@ -27,7 +27,7 @@
 
 @class JSQMessagesCollectionView;
 
-
+NS_ASSUME_NONNULL_BEGIN
 /**
  *  A constant that describes the default height for all label subviews in a `JSQMessagesCollectionViewCell`.
  *
@@ -211,3 +211,5 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -21,6 +21,8 @@
 
 #import "JSQMessagesComposerTextView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A constant value representing the default spacing to use for the left and right edges 
  *  of the toolbar content view.
@@ -122,3 +124,5 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
 + (UINib *)nib;
 
 @end
+
+NS_ASSUME_NONNULL_END

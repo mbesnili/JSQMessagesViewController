@@ -21,6 +21,8 @@
 
 @class JSQMessagesBubbleImageFactory;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An instance of `JSQMessagesMediaViewBubbleImageMasker` is an object that masks
  *  media views for a `JSQMessageMediaData` object. Given a view, it will mask the view
@@ -88,3 +90,5 @@
 + (void)applyBubbleImageMaskToMediaView:(UIView *)mediaView isOutgoing:(BOOL)isOutgoing;
 
 @end
+
+NS_ASSUME_NONNULL_END

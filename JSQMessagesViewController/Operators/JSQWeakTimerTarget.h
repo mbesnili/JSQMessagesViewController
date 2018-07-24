@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface JSQWeakTimerTarget : NSObject
 
 - (instancetype)initWithTarget:(id)target selector:(SEL)selector;
 
 @end
+
+NS_ASSUME_NONNULL_END

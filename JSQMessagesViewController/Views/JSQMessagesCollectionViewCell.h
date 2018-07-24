@@ -23,6 +23,8 @@
 
 @class JSQMessagesCollectionViewCell;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMessagesCollectionViewCellDelegate` protocol defines methods that allow you to manage
  *  additional interactions within the collection view cell.
@@ -204,3 +206,5 @@
 + (void)registerMenuAction:(SEL)action;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An instance of `JSQMessagesTimestampFormatter` is a singleton object that provides an efficient means 
  *  for creating attributed and non-attributed string representations of `NSDate` objects. 
@@ -58,7 +60,7 @@
  *
  *  @return A formatted string representation of date.
  */
-- (NSString *)timestampForDate:(NSDate *)date;
+- (nullable NSString *)timestampForDate:(nullable NSDate *)date;
 
 /**
  *  Returns an attributed string representation of the given date formatted as described in `timestampForDate:`. 
@@ -72,7 +74,7 @@
  *  @see `dateTextAttributes`.
  *  @see `timeTextAttributes`.
  */
-- (NSAttributedString *)attributedTimestampForDate:(NSDate *)date;
+- (nullable NSAttributedString *)attributedTimestampForDate:(nullable NSDate *)date;
 
 /**
  *  Returns a string representation of *only* the minute and hour components of the given date formatted in the current locale styled using `NSDateFormatterShortStyle`.
@@ -81,7 +83,7 @@
  *
  *  @return A formatted string representation of the minute and hour components of date.
  */
-- (NSString *)timeForDate:(NSDate *)date;
+- (nullable NSString *)timeForDate:(nullable NSDate *)date;
 
 /**
  *  Returns a string representation of *only* the day, month, and year components of the given date formatted in the current locale styled using `NSDateFormatterMediumStyle`.
@@ -90,6 +92,8 @@
  *
  *  @return A formatted string representation of the day, month, and year components of date.
  */
-- (NSString *)relativeDateForDate:(NSDate *)date;
+- (nullable NSString *)relativeDateForDate:(nullable NSDate *)date;
 
 @end
+
+NS_ASSUME_NONNULL_END

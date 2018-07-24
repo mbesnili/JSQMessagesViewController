@@ -18,6 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A `JSQMessagesCollectionViewFlowLayoutInvalidationContext` object specifies properties for 
  *  determining whether to recompute the size of items or their position in the layout. 
@@ -45,3 +47,5 @@
 + (instancetype)context;
 
 @end
+
+NS_ASSUME_NONNULL_END

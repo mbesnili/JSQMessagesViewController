@@ -18,6 +18,8 @@
 
 #import "JSQMessageMediaData.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `JSQMediaItem` class is an abstract base class for media item model objects that represents
  *  a single media attachment for a user message. It provides some default behavior for media items,
@@ -56,3 +58,5 @@
 - (void)clearCachedMediaViews;
 
 @end
+
+NS_ASSUME_NONNULL_END

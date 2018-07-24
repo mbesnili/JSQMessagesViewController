@@ -20,6 +20,8 @@
 
 #import "JSQMessagesBubbleSizeCalculating.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An instance of `JSQMessagesBubblesSizeCalculator` is responsible for calculating
  *  message bubble sizes for an instance of `JSQMessagesCollectionViewFlowLayout`.
@@ -41,3 +43,6 @@
         usesFixedWidthBubbles:(BOOL)usesFixedWidthBubbles NS_DESIGNATED_INITIALIZER;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

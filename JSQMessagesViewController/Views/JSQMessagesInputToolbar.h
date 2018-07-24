@@ -23,6 +23,7 @@
 
 @class JSQMessagesInputToolbar;
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with
@@ -108,3 +109,5 @@
 - (JSQMessagesToolbarContentView *)loadToolbarContentView;
 
 @end
+
+NS_ASSUME_NONNULL_END

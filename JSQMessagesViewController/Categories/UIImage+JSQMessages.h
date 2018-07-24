@@ -18,6 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIImage (JSQMessages)
 
 /**
@@ -27,7 +29,7 @@
  *
  *  @return A new image object masked with the specified color.
  */
-- (UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor;
+- (nullable UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor;
 
 /**
  *  @return The regular message bubble image.
@@ -82,3 +84,5 @@
 + (UIImage *)jsq_defaultPauseImage;
 
 @end
+
+NS_ASSUME_NONNULL_END
