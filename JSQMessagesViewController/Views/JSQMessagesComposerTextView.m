@@ -61,6 +61,7 @@
 
     _placeHolder = nil;
     _placeHolderTextColor = [UIColor lightGrayColor];
+    _placeHolderInsets = UIEdgeInsetsMake(5.0, 7.0, 5.0, 7.0);
 
     [self jsq_addTextViewNotificationObservers];
 }
@@ -114,6 +115,16 @@
     [self setNeedsDisplay];
 }
 
+- (void)setPlaceHolderInsets:(UIEdgeInsets)placeHolderInsets
+{
+    if (UIEdgeInsetsEqualToEdgeInsets(placeHolderInsets, _placeHolderInsets)) {
+        return;
+    }
+    
+    _placeHolderInsets = placeHolderInsets;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - UITextView overrides
 
 - (void)setText:(NSString *)text
@@ -155,8 +166,8 @@
 
     if ([self.text length] == 0 && self.placeHolder) {
         [self.placeHolderTextColor set];
-
-        [self.placeHolder drawInRect:CGRectInset(rect, 7.0f, 5.0f)
+        
+        [self.placeHolder drawInRect:UIEdgeInsetsInsetRect(rect, self.placeHolderInsets)
                       withAttributes:[self jsq_placeholderTextAttributes]];
     }
 }

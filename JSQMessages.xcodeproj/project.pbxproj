@@ -136,6 +136,7 @@
 		77048D861F4498970084C0E5 /* JSQWeakTimerTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQWeakTimerTarget.m; sourceTree = "<group>"; };
 		77048D891F4499C20084C0E5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		77ACC1282106FAE000D519F1 /* JSQMessagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQMessagesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		77ACC1712107250B00D519F1 /* JSQMessagesViewAccessoryButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesViewAccessoryButtonDelegate.h; sourceTree = "<group>"; };
 		88078A9B19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesMediaPlaceholderView.h; sourceTree = "<group>"; };
 		88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaPlaceholderView.m; sourceTree = "<group>"; };
 		88324C3319F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaViewBubbleImageMaskerTests.m; sourceTree = "<group>"; };
@@ -510,6 +511,7 @@
 		88A25F7619D8E01A00924534 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				77ACC1712107250B00D519F1 /* JSQMessagesViewAccessoryButtonDelegate.h */,
 				54271E3C1C905B9200294290 /* JSQAudioMediaItem.h */,
 				54271E3D1C905B9200294290 /* JSQAudioMediaItem.m */,
 				88445B3E19E1B4470014F889 /* JSQLocationMediaItem.h */,

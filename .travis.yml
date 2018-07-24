@@ -20,7 +20,8 @@ before_install:
 install: true
 
 script:
-
+- set -o pipefail
+  
 - if [ $POD_LINT == "YES" ]; then
    pod spec lint;
    pod lib lint;

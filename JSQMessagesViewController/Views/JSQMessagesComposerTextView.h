@@ -53,6 +53,11 @@
 @property (strong, nonatomic) UIColor *placeHolderTextColor;
 
 /**
+ *  The insets to be used when the placeholder is drawn. The default value is `UIEdgeInsets(5.0, 7.0, 5.0, 7.0)`.
+ */
+@property (assign, nonatomic) UIEdgeInsets placeHolderInsets;
+
+/**
  *  The object that acts as the paste delegate of the text view.
  */
 @property (weak, nonatomic) id<JSQMessagesComposerTextViewPasteDelegate> jsqPasteDelegate;
