@@ -29,7 +29,7 @@
 /**
  *  The URL that identifies a video resource.
  */
-@property (nonatomic, strong) NSURL *fileURL;
+@property (nonatomic, strong, nullable) NSURL *fileURL;
 
 /**
  *  Adding an image to mask behind the video.
@@ -56,7 +56,7 @@
  *  isReadyToPlay. Once the video has been saved to disk, or is ready to stream, you can
  *  set the fileURL property or isReadyToPlay property, respectively.
  */
-- (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay;
+- (nonnull instancetype)initWithFileURL:(NSURL * _Nullable)fileURL isReadyToPlay:(BOOL)isReadyToPlay;
 
 /**
  *  Initializes and returns a video media item having the given fileURL.
@@ -73,8 +73,24 @@
  *  set the fileURL property or isReadyToPlay property, respectively. The background thumbnail
  *  is optional.
  */
-- (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage;
+- (nonnull instancetype)initWithFileURL:(nullable NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage;
 
-- (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(UIImage *)thumbnailImage playButtonImage:(UIImage *)playButtonImage;
+/**
+ *  Initializes and returns a video media item having the given fileURL.
+ *
+ *  @param fileURL          The URL that identifies the video resource.
+ *  @param isReadyToPlay    A boolean value that specifies if the video is ready to play.
+ *  @param thumbnailImage   The background thumbnail for the video.
+ *  @param playButtonImage  The play button image displayed on thumbnail image.
+ *
+ *  @return An initialized `JSQVideoMediaItem` if successful, `nil` otherwise.
+ *
+ *  @discussion If the video must be downloaded from the network,
+ *  you may initialize a `JSQVideoMediaItem` with a `nil` fileURL or specify `NO` for
+ *  isReadyToPlay. Once the video has been saved to disk, or is ready to stream, you can
+ *  set the fileURL property or isReadyToPlay property, respectively. The background thumbnail
+ *  is optional. The play button image is optional.
+ */
+- (nonnull instancetype)initWithFileURL:(nullable NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay thumbnailImage:(nullable UIImage *)thumbnailImage playButtonImage:(nullable UIImage * )playButtonImage;
 
 @end

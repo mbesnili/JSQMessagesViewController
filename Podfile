@@ -13,3 +13,9 @@ target 'JSQMessages' do
     
 end
 
+target 'JSQMessagesTests' do
+    
+    pod 'JSQSystemSoundPlayer', '~> 2.0'
+    
+end
+
