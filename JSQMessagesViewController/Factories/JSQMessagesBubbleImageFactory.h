@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
-- (nullable instancetype)init;
+- (instancetype)init;
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` having the specified
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
  */
-- (nullable instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets;
+- (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets;
 
 /**
  *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *outgoing* message image bubbles.
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
-- (nullable JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
+- (JSQMessagesBubbleImage *)outgoingMessagesBubbleImageWithColor:(UIColor *)color;
 
 /**
  *  Creates and returns a `JSQMessagesBubbleImage` object with the specified color for *incoming* message image bubbles.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return An initialized `JSQMessagesBubbleImage` object if created successfully, `nil` otherwise.
  */
-- (nullable JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
+- (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
 
 @end
 
