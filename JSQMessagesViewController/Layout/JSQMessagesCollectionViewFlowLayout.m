@@ -64,8 +64,6 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     self.sectionInset = UIEdgeInsetsMake(10.0f, 4.0f, 10.0f, 4.0f);
     self.minimumLineSpacing = 4.0f;
     
-    _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         _messageBubbleLeftRightMargin = 240.0f;
     }
@@ -144,17 +142,6 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         [_dynamicAnimator removeAllBehaviors];
         [_visibleIndexPaths removeAllObjects];
     }
-    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-}
-
-- (void)setMessageBubbleFont:(UIFont *)messageBubbleFont
-{
-    if ([_messageBubbleFont isEqual:messageBubbleFont]) {
-        return;
-    }
-    
-    NSParameterAssert(messageBubbleFont != nil);
-    _messageBubbleFont = messageBubbleFont;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
@@ -437,9 +424,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
     layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
-    
-    layoutAttributes.messageBubbleFont = self.messageBubbleFont;
-    
+        
     layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
     
     layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;

@@ -36,7 +36,6 @@
 
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
-#import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
 
 #import <objc/runtime.h>
@@ -297,10 +296,6 @@ JSQMessagesKeyboardControllerDelegate>
     [self jsq_addObservers];
     [self jsq_addActionToInteractivePopGestureRecognizer:YES];
     [self.keyboardController beginListeningForKeyboard];
-
-    if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-        [self.snapshotView removeFromSuperview];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -546,15 +541,7 @@ JSQMessagesKeyboardControllerDelegate>
     cell.delegate = collectionView;
 
     if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-
-        if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-            //  workaround for iOS 7 textView data detectors bug
-            cell.textView.text = nil;
-            cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
-                                                                           attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
-        }
-
+        cell.textView.attributedText = [messageItem attributedText];
         NSParameterAssert(cell.textView.text != nil);
 
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
@@ -625,7 +612,7 @@ JSQMessagesKeyboardControllerDelegate>
     if (!isMediaMessage) {
         cell.accessibilityLabel = [NSString stringWithFormat:[NSBundle jsq_localizedStringForKey:@"text_message_accessibility_label"],
                                    [messageItem senderDisplayName],
-                                   [messageItem text]];
+                                   [messageItem attributedText]];
     }
     else {
         cell.accessibilityLabel = [NSString stringWithFormat:[NSBundle jsq_localizedStringForKey:@"media_message_accessibility_label"],
@@ -702,7 +689,7 @@ JSQMessagesKeyboardControllerDelegate>
 {
     if (action == @selector(copy:)) {
         id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:[messageData text]];
+        [[UIPasteboard generalPasteboard] setString:[messageData attributedText].string];
     }
     else if (action == @selector(delete:)) {
         [collectionView.dataSource collectionView:collectionView didDeleteMessageAtIndexPath:indexPath];
@@ -926,25 +913,8 @@ JSQMessagesKeyboardControllerDelegate>
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-                [self.snapshotView removeFromSuperview];
-            }
-
             self.textViewWasFirstResponderDuringInteractivePop = [self.inputToolbar.contentView.textView isFirstResponder];
-
             [self.keyboardController endListeningForKeyboard];
-
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-                [self.inputToolbar.contentView.textView resignFirstResponder];
-                [UIView animateWithDuration:0.0
-                                 animations:^{
-                                     [self jsq_setToolbarBottomLayoutGuideConstant:0.0];
-                                 }];
-
-                UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
-                [self.view addSubview:snapshot];
-                self.snapshotView = snapshot;
-            }
         }
             break;
         case UIGestureRecognizerStateChanged:
@@ -955,10 +925,6 @@ JSQMessagesKeyboardControllerDelegate>
             [self.keyboardController beginListeningForKeyboard];
             if (self.textViewWasFirstResponderDuringInteractivePop) {
                 [self.inputToolbar.contentView.textView becomeFirstResponder];
-            }
-
-            if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-                [self.snapshotView removeFromSuperview];
             }
             break;
         default:

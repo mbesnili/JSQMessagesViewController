@@ -95,6 +95,12 @@
     return self.hash;
 }
 
+- (NSAttributedString *)attributedText
+{
+    return [[NSAttributedString alloc] initWithString:self.text
+                                           attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]}];
+}
+
 #pragma mark - NSObject
 
 - (BOOL)isEqual:(id)object

@@ -28,8 +28,6 @@
 
 @interface JSQMessagesBubblesSizeCalculator ()
 
-@property (strong, nonatomic, readonly) NSCache *cache;
-
 @property (assign, nonatomic, readonly) NSUInteger minimumBubbleWidth;
 
 @property (assign, nonatomic, readonly) BOOL usesFixedWidthBubbles;
@@ -116,9 +114,8 @@
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
         CGFloat maximumTextWidth = [self textBubbleWidthForLayout:layout] - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
 
-        CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
+        CGRect stringRect = [[messageData attributedText] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                          attributes:@{ NSFontAttributeName : layout.messageBubbleFont }
                                                              context:nil];
 
         CGSize stringSize = CGRectIntegral(stringRect).size;

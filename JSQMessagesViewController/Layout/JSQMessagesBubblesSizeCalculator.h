@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface JSQMessagesBubblesSizeCalculator : NSObject <JSQMessagesBubbleSizeCalculating>
 
+@property (strong, nonatomic, readonly) NSCache *cache;
+
 /**
  *  Initializes and returns a bubble size calculator with the given cache and minimumBubbleWidth.
  *
