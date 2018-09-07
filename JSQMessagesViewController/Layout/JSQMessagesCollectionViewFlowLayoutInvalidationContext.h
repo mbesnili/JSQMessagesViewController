@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return An initialized invalidation context object if successful, otherwise `nil`.
  */
-+ (instancetype)context;
++ (instancetype)context NS_SWIFT_NAME(defaultContext());
 
 @end
 
