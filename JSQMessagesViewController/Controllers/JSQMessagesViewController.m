@@ -456,6 +456,7 @@ JSQMessagesKeyboardControllerDelegate>
                                          - CGRectGetHeight(self.inputToolbar.bounds);
     UICollectionViewScrollPosition scrollPosition = (cellSize.height > maxHeightForVisibleMessage) ? UICollectionViewScrollPositionBottom : UICollectionViewScrollPositionTop;
 
+    [self.collectionView layoutIfNeeded];
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:scrollPosition
                                         animated:animated];
