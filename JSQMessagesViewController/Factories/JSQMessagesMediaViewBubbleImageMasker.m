@@ -77,7 +77,7 @@
     UIImageView *imageViewMask = [[UIImageView alloc] initWithImage:image];
     imageViewMask.frame = CGRectInset(view.frame, 2.0f, 2.0f);
     
-    view.maskView = imageViewMask
+    view.maskView = imageViewMask;
 }
 
 @end
